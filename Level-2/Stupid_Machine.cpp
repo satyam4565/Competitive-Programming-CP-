@@ -30,20 +30,16 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 
 
 void solve(){
-    string s;
-    cin>>s;
-    bool flag = true;
-    for(int i=0;i<s.size();){
-        if(s.substr(i,3)=="144") i+=3;
-        else if(s.substr(i,2)=="14") i+=2;
-        else if(s.substr(i,1)=="1") i++;
-        else{
-            flag=false;
-            break;
-        }
+    int n;
+    cin>>n;
+    vi v(n);frc(v,i,n);
+    int ans = 0;
+    int mini = INT_MAX;
+    fr(i,n){
+        mini = min(mini,v[i]);
+        ans+=mini;
     }
-    if(flag) yup;
-    else nope;
+    cout<<ans<<endl;
 }
 
 int32_t main()
@@ -51,7 +47,13 @@ int32_t main()
  
  ios_base::sync_with_stdio(false);
  cin.tie(NULL);
-    solve();
+
+    int T = 1;
+    cin >> T;
+    while (T--)
+    {
+        solve();
+    }
     return 0;
 }
 
