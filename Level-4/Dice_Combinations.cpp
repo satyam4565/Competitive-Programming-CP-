@@ -28,19 +28,26 @@ void modmul(int &a , int b) {a=((a%MOD)*(b%MOD))%MOD;}
 template<typename typC,typename typD> istream &operator>>(istream &cin,pair<typC,typD> &a) { return cin>>a.first>>a.second; }
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 
-void solve(){
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int x = 0;
-    for(int i=0;i<n;i++){
-        if(s[i]=='A') x++;
-        else x--;
+int dp[1000001];
+
+int f(int n){
+    if(n==0) return 1;
+    if(dp[n]!=-1) return dp[n];
+    int ans = 0;
+    for(int i=1;i<=6;i++){
+        if((n-i)>=0) ans+=f(n-i);
+        if(ans>=MOD) ans-=MOD;
     }
-    if(x==0) cout<<"Friendship"<<endl;
-    else if(x>0) cout<<"Anton"<<endl;
-    else cout<<"Danik"<<endl;
+    return dp[n] = ans;
+}
+
+void solve(){
+    int n;cin>>n;
+    for(int i=0;i<=n;i++){
+        dp[i]=-1;
+    }
+    cout<<f(n)<<endl;
+
 }
 
 int32_t main()
@@ -48,6 +55,7 @@ int32_t main()
  
  ios_base::sync_with_stdio(false);
  cin.tie(NULL);
+
     solve();
     return 0;
 }

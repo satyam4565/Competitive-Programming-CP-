@@ -28,19 +28,28 @@ void modmul(int &a , int b) {a=((a%MOD)*(b%MOD))%MOD;}
 template<typename typC,typename typD> istream &operator>>(istream &cin,pair<typC,typD> &a) { return cin>>a.first>>a.second; }
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 
+
 void solve(){
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int x = 0;
+    int n,x;cin>>n>>x;
+    vector<pair<int,int>> v(n);
     for(int i=0;i<n;i++){
-        if(s[i]=='A') x++;
-        else x--;
+        cin>>v[i].first;
+        v[i].second = i+1;
     }
-    if(x==0) cout<<"Friendship"<<endl;
-    else if(x>0) cout<<"Anton"<<endl;
-    else cout<<"Danik"<<endl;
+    srt(v);
+    for(int i=0;i<n;i++){
+        int j=i+1,k=n-1;
+        while(j<k){
+            int sum = v[i].first+v[j].first+v[k].first;
+            if(sum == x){
+                cout<<v[i].second<<" "<<v[j].second<<" "<<v[k].second<<" "<<endl;
+                return;
+            }
+            else if(sum>x) k--;
+            else j++;
+        }
+    }
+    cout<<"IMPOSSIBLE"<<endl;
 }
 
 int32_t main()

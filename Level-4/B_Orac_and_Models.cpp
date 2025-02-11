@@ -28,19 +28,17 @@ void modmul(int &a , int b) {a=((a%MOD)*(b%MOD))%MOD;}
 template<typename typC,typename typD> istream &operator>>(istream &cin,pair<typC,typD> &a) { return cin>>a.first>>a.second; }
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 
+
 void solve(){
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int x = 0;
-    for(int i=0;i<n;i++){
-        if(s[i]=='A') x++;
-        else x--;
+    int n;cin>>n;
+    vi v(n+1);for(int i=1;i<=n;i++) cin>>v[i];
+    vi dp(n+1,1);
+    for(int i=1;i<=n;i++){
+        for(int j=2*i;j<=n;j+=i){
+            if(v[j]>v[i]) dp[j] = max(dp[j],dp[i]+1);
+        }
     }
-    if(x==0) cout<<"Friendship"<<endl;
-    else if(x>0) cout<<"Anton"<<endl;
-    else cout<<"Danik"<<endl;
+    cout<<mxe(dp)<<endl;
 }
 
 int32_t main()
@@ -48,7 +46,13 @@ int32_t main()
  
  ios_base::sync_with_stdio(false);
  cin.tie(NULL);
-    solve();
+
+    int T = 1;
+    cin >> T;
+    while (T--)
+    {
+        solve();
+    }
     return 0;
 }
 

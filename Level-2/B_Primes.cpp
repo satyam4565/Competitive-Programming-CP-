@@ -28,19 +28,30 @@ void modmul(int &a , int b) {a=((a%MOD)*(b%MOD))%MOD;}
 template<typename typC,typename typD> istream &operator>>(istream &cin,pair<typC,typD> &a) { return cin>>a.first>>a.second; }
 template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a) { int n=a.size(); if (!n) return cout; cout<<a[0]; for (int i=1; i<n; i++) cout<<' '<<a[i]; return cout; }
 
-void solve(){
-    int n;
-    cin>>n;
-    string s;
-    cin>>s;
-    int x = 0;
-    for(int i=0;i<n;i++){
-        if(s[i]=='A') x++;
-        else x--;
+
+void sieve(int n, vector<bool> &is_prime) {
+    is_prime.assign(n + 1, true);
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i * i <= n; i++) {
+        if (is_prime[i]) {
+            for (int j = i * i; j <= n; j += i) {
+                is_prime[j] = false;
+            }
+        }
     }
-    if(x==0) cout<<"Friendship"<<endl;
-    else if(x>0) cout<<"Anton"<<endl;
-    else cout<<"Danik"<<endl;
+}
+
+void solve(){
+    int n;cin>>n;
+    vector<bool> is_prime(n);
+    sieve(n,is_prime);
+    for(int i=2;i*i<=n;i++){
+        if(is_prime[i]==true && is_prime[n-i]==true){
+            cout<<i<<" "<<n-i<<endl;
+            return;
+        }
+    }
+    cout<<"-1"<<endl;
 }
 
 int32_t main()
@@ -48,6 +59,7 @@ int32_t main()
  
  ios_base::sync_with_stdio(false);
  cin.tie(NULL);
+
     solve();
     return 0;
 }
