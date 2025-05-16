@@ -7,9 +7,11 @@
 #define vvi vector<vi >
 #define vb vector<bool>
 #define vvb vector<vb >
+#define q_max priority_queue<int,vi>
+#define q_min priority_queue<int,vi,greater<int>>
 #define fr(i,n) for(int i=0; i<(n); i++)
 #define frc(v,i,n) for(int i=0; i<(n); i++){cin>>v[i];}
-#define loop(i,a,n) for(int i=(a); i<=(n); i++)
+#define loop(i,a,n) for(int i=(a); i<(n); i++)
 #define nl cout<<"\n"
 #define dbg(var) cout<<#var<<"="<<var<<" "
 #define all(v) v.begin(),v.end()
@@ -19,6 +21,10 @@
 #define mne(v)  *min_element(v.begin(),v.end())
 #define unq(v)  v.resize(distance(v.begin(), unique(v.begin(), v.end())));
 #define bin(x,y)  bitset<y>(x)
+#define pb push_back
+#define F first
+#define S second
+#define pii pair<int,int>
 using namespace std;
 int MOD=1e9+7;
 
@@ -91,9 +97,12 @@ void sieve(int n, vector<bool> &is_prime) {
 }
 
 void solve(){
-    int n;cin>>n;
-    vi v(n);frc(v,i,n);
-    
+    string s;cin>>s;
+    int n = s.size();
+    int ans = 0;
+    ans+=(n-1)*9;
+    ans+=s[0]-'0';
+    cout<<ans<<endl;
 }
 
 int32_t main()
