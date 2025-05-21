@@ -37,12 +37,8 @@ int powerOfTwo(int n) {if (n <= 0) return -1;if ((n & (n - 1)) == 0) return log2
 
 void solve(){
     int n,k;cin>>n>>k;
-    if(n%2==0 || n%k==0){
-        cout << "YES\n";
-        return;
-    }
-    int rem = n%k;
-    rem%2==0 ? cout << "YES\n" : cout << "NO\n";    
+    if(n%2==0 || k%2==1) {cout << "YES\n";return;}
+    nope;  
 }
 
 int32_t main()
